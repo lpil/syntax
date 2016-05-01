@@ -1,0 +1,25 @@
+import erlang.maps as m
+
+# This is a comment.
+
+public:
+  handle_call({:order, n, c, d}, _from, []) =
+    {:reply, :empty, []}
+  handle_call({:order, n, c, d}, _from, [cat|cats]) =
+    {:reply, cat, cats}
+  handle_call(:terminate, _from, cats) =
+    {:stop, :normal, :ok, cats}
+
+  handle_call(foo, from, state) =
+    new_state = my_func(1)
+    {:stop, :normal, :ok, new_state}
+
+sum(x, y, z) =
+  x + y + z
+
+tests:
+  setup() =
+    do_something()
+
+  test("it does something") =
+    assert_eq(foo, bar)
