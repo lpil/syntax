@@ -1,0 +1,33 @@
+import maps as m
+
+# This is a comment.
+
+public fibonacci/1:
+  doc: """
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+  diam nonumy eirmod tempor invidunt ut labore et dolore magna
+  aliquyam erat, sed diam voluptua.
+  """
+  spec: (number): number
+
+  (n) when n < 0: error("fibonacci of negative number")
+  (0): 0
+  (1): 1
+  (n): fibonacci(n - 1) + fibonacci(n - 2)
+
+  examples:
+    "base case of 0":
+      params: 0
+      return: 0
+
+    "base case of 1":
+      params: 1
+      return: 1
+
+    "larger numbers are calculated":
+      params: 8
+      return: 21
+
+    "errors with negative numbers":
+      params: -3
+      errors: "fibonacci of negative number"
