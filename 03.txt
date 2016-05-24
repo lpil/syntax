@@ -1,0 +1,59 @@
+import lists as l
+
+public fibonacci {
+  doc """
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+  diam nonumy eirmod tempor invidunt ut labore et dolore magna
+  aliquyam erat, sed diam voluptua.
+  """
+
+  spec (number) { number }
+
+  def (n) when n < 0 { error("fibonacci of negative number") }
+  def (0) { 0 }
+  def (1) { 1 }
+  def (n) { fibonacci(n - 1) + fibonacci(n - 2) }
+
+  test "base cases" {
+    fibonacci(0) |> shouldBe(0)
+    fibonacci(1) |> shouldbe(1)
+  }
+
+  test "larger numbers are calculated" {
+    fibonacci(8) |> shouldbe(21)
+  }
+
+  test "errors with negative numbers" = {
+    fibonacci(-3) |> shouldError("fibonacci of negative number")
+  }
+}
+
+public any? {
+  doc """
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+  """
+  spec (list(n), &(n) { any }) { bool }
+
+  def ([], _) {
+    false
+  }
+  def ([h|t], f) {
+    case f(h) {
+      :false { any?(t, f) }
+      :nil   { any?(t, f) }
+      _      { :true }
+    }
+  }
+
+  test "any even?" {
+    any?([1, 3, 5, 7, 8, 9], &even/1) |> shouldBe(:true)
+  }
+
+  test "any something else" {
+    any?([1, 3, 5, 7, 8, 9], &(x) { x < 10 }) |> shouldBe(:false)
+  }
+}
+
+private rev {
+  def (n) { l.reverse(n) }
+}
