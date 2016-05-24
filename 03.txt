@@ -20,16 +20,16 @@ public fibonacci {
   def (n) { fibonacci(n - 1) + fibonacci(n - 2) }
 
   test "base cases" {
-    fibonacci(0) |> shouldBe(0)
-    fibonacci(1) |> shouldbe(1)
+    self(0) |> shouldBe(0)
+    self(1) |> shouldbe(1)
   }
 
   test "larger numbers are calculated" {
-    fibonacci(8) |> shouldbe(21)
+    self(8) |> shouldbe(21)
   }
 
   test "errors with negative numbers" = {
-    fibonacci(-3) |> shouldError("fibonacci of negative number")
+    self(-3) |> shouldError("fibonacci of negative number")
   }
 }
 
@@ -44,18 +44,18 @@ public any? {
   }
   def ([h|t], f) {
     case f(h) {
-      :false { any?(t, f) }
-      :nil   { any?(t, f) }
+      :false { self(t, f) }
+      :nil   { self(t, f) }
       _      { :true }
     }
   }
 
   test "any even?" {
-    any?([1, 3, 5, 7, 8, 9], &even/1) |> shouldBe(:true)
+    self([1, 3, 5, 7, 8, 9], &even/1) |> shouldBe(:true)
   }
 
   test "any something else" {
-    any?([1, 3, 5, 7, 8, 9], &(x) { x < 10 }) |> shouldBe(:false)
+    self([1, 3, 5, 7, 8, 9], &(x) { x < 10 }) |> shouldBe(:false)
   }
 }
 
@@ -63,6 +63,6 @@ private rev {
   def (n) { :lists.reverse(n) }
 
   test "2 item list" {
-    rev([1, 2]) |> shouldBe([2, 1)
+    self([1, 2]) |> shouldBe([2, 1)
   }
 }
