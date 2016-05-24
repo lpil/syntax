@@ -1,4 +1,9 @@
-import lists as l
+module MyApp.MyFunctions
+
+doc """
+Stet clita kasd gubergren, no sea takimata sanctus
+est Lorem ipsum dolor sit amet.
+"""
 
 public fibonacci {
   doc """
@@ -55,5 +60,9 @@ public any? {
 }
 
 private rev {
-  def (n) { l.reverse(n) }
+  def (n) { :lists.reverse(n) }
+
+  test "2 item list" {
+    rev([1, 2]) |> shouldBe([2, 1)
+  }
 }
